@@ -1,20 +1,44 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Movies = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [movies, setMovies] = useState(() => {
+    const savedMovies = localStorage.getItem('movies');
+    return savedMovies ? JSON.parse(savedMovies) : [];
+  });
   const navigate = useNavigate();
+  const apiKey = '37e7d95cf2428fca838e6974f910059b'; // Замініть на свій TMDb API ключ
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
 
-  const handleSearchSubmit = (event) => {
+  const handleSearchSubmit = async (event) => {
     event.preventDefault();
     // Navigate to the search results page
     navigate(`/movies?query=${searchQuery}`);
+    await fetchMovies(searchQuery);
   };
 
+  const fetchMovies = async (query) => {
+    try {
+      const response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${query}`);
+      const data = await response.json();
+      if (data.results) {
+        setMovies(data.results);
+        localStorage.setItem('movies', JSON.stringify(data.results));
+      }
+    } catch (error) {
+      console.error('Error fetching movies:', error);
+    }
+  };
+const clearLocalStorageOnLoad = () => {
+  localStorage.clear(); // Очистити локальне сховище при завантаженні
+};
+
+// Додати обробник подій для події "load"
+window.addEventListener('load', clearLocalStorageOnLoad);
   return (
     <div>
       <h2>Movies</h2>
@@ -27,7 +51,14 @@ const Movies = () => {
         />
         <button type="submit">Search</button>
       </form>
-      {/* Add more components or content for movie search and display */}
+
+      <ul>
+        {movies.map((movie) => (
+          <li key={movie.id}>
+            <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

@@ -21,7 +21,20 @@ code {
   border: 1px solid #ccc;
   border-radius: 8px;
 }
+.header {
+  display: flex;
+  list-style-type: none;
+ 
+}
+.header-home {
+  margin-right: 20px;
+}
 
+.navigate {
+  box-shadow: 0 5px 7px rgba(0, 0, 0, 0.2);
+  padding-bottom: 10px;
+  
+}
 .card-img-top {
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
@@ -39,4 +52,23 @@ code {
 
 .card-text {
   font-size: 1rem;
+}
+.additional-info {
+  box-shadow: 0 5px 7px rgba(0, 0, 0, 0.2);
+}
+.additional-info-ul {
+  list-style-type: none;
+  padding-bottom: 10px;
+}
+.additional-info-li-cast {
+  margin-bottom: 20px;
+}
+.div-add {
+  padding-bottom: 10px;
+  display: flex;
+}
+.img-info {
+  width: 350px;
+  height: 350px;
+  margin-right: 40px;
 }
