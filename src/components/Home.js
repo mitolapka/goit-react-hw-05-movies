@@ -7,14 +7,14 @@ const Home = () => {
   useEffect(() => {
     const fetchTrendingMovies = async () => {
       try {
-        const apiKey = '37e7d95cf2428fca838e6974f910059b'; // Замініть на свій TMDb API ключ
+        const apiKey = '37e7d95cf2428fca838e6974f910059b';
         const trendingUrl = `https://api.themoviedb.org/3/trending/all/day?api_key=${apiKey}`;
 
         const response = await fetch(trendingUrl);
         const data = await response.json();
 
         if (data.results) {
-          // Фільтруємо фільми з непорожнім title перед встановленням в стан
+        
           setTrendingMovies(data.results.filter(movie => movie.title && movie.title.trim() !== ''));
         }
       } catch (error) {

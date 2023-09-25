@@ -8,7 +8,7 @@ const Movies = () => {
     return savedMovies ? JSON.parse(savedMovies) : [];
   });
   const navigate = useNavigate();
-  const apiKey = '37e7d95cf2428fca838e6974f910059b'; // Замініть на свій TMDb API ключ
+  const apiKey = '37e7d95cf2428fca838e6974f910059b'; 
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
@@ -16,7 +16,6 @@ const Movies = () => {
 
   const handleSearchSubmit = async (event) => {
     event.preventDefault();
-    // Navigate to the search results page
     navigate(`/movies?query=${searchQuery}`);
     await fetchMovies(searchQuery);
   };
@@ -34,10 +33,9 @@ const Movies = () => {
     }
   };
 const clearLocalStorageOnLoad = () => {
-  localStorage.clear(); // Очистити локальне сховище при завантаженні
+  localStorage.clear(); 
 };
 
-// Додати обробник подій для події "load"
 window.addEventListener('load', clearLocalStorageOnLoad);
   return (
     <div>

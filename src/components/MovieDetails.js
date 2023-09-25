@@ -9,10 +9,9 @@ const MovieDetails = () => {
   const [reviews, setReviews] = useState([]);
   const [isCastVisible, setIsCastVisible] = useState(false);
   const [areReviewsVisible, setAreReviewsVisible] = useState(false);
-  const [movieImage, setMovieImage] = useState(null); // Додали стан для зображення фільму
-
+  const [movieImage, setMovieImage] = useState(null); 
   useEffect(() => {
-    const apiKey = '37e7d95cf2428fca838e6974f910059b'; // Замініть на свій TMDb API ключ
+    const apiKey = '37e7d95cf2428fca838e6974f910059b'; 
     const movieDetailsUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=en-US`;
     const castUrl = `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${apiKey}`;
     const reviewsUrl = `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=${apiKey}`;
